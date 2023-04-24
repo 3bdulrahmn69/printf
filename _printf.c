@@ -2,193 +2,170 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-/*
-typedef struct specifier
+/**
+ * resLength - Computes the length of the result produced by printf
+ * @format: format string to be printed
+ * Return: length of the result
+ */
+int resLength(const char *format)
 {
-    int c;
-    int s;
-    // int i;
-    // double f;
-} Specifier;
-*/
+int i = 0, len = 1;
 
-// * for testing
-void printArrStr(char **astr, int len)
+if (!format)
+return (0);
+
+for (; format[i] != '\0'; i++)
 {
-    int i;
+if (format[i] == '%')
+{
+if (format[i + 1] == 's' || format[i + 1] == 'c')
+len++;
+}
 
-    for (i = 0; i < len; i++)
-    {
-        printf("%s\n", astr[i]);
-    }
+if (format[i - 2] == '%')
+len++;
+}
+
+if (i == 0)
+return (0);
+
+return (len);
 }
 
 /**
- * inTarget - sum args from variadic args
- * @c: string to print
- * Return: int
-*/
-/*
-void * inTarget(char c)
+ * getSubstring - extracts a substring from a given string
+ * @str: the original string
+ * @s: the start index of the substring
+ * @e: the end index of the substring
+ * Return: pointer to the extracted substring
+ */
+char *getSubstring(const char *str, int s, int e)
 {
-    Specifier *obj = (Specifier *) malloc(sizeof(Specifier));
+int i = s;
+char *res = malloc(e - s + 1);
 
-    obj->c = 0;
-    obj->s = 0;
-    if (c == 'c')
-        obj->c = 1;
-    else if (c == 's')
-        obj->s = 1;
+if (!res)
+return (NULL);
 
-    return (obj);
-}
-*/
-
-int resLength(const char *format)
+for (; i < e; i++)
 {
-    int i = 0, len = 1;
-
-    if (!format)
-        return (0);
-
-    for (; format[i] != '\0'; i++)
-    {
-        // find this %
-        if (format[i] == '%')
-        {
-            // find specifier
-            if (format[i + 1] == 's' || format[i + 1] == 'c')
-                // increment the length variable 
-                len++;
-        }
-
-        // find the first char not equal '\0' after specifier
-        if (format[i - 2] == '%')
-            len++;
-    }
-
-    if (i == 0)
-        return (0);
-
-    return (len);
+res[i - s] = str[i];
 }
 
-char * getSubstring(const char *str, int s, int e)
-{
-    int i = s;
-    char *res = malloc(e - s + 1);
+res[i] = '\0';
 
-    if (!res)
-        return (NULL);
-
-    for(; i < e; i++)
-    {
-        res[i - s] = str[i];
-    }
-
-    res[i] = '\0';
-
-    return (res);
+return (res);
 }
 
-char ** handlingFormat(const char *format, int l)
+/**
+ * handlingFormat - function that tokenize a string to
+ * get the substrings and their format in a % like printf
+ * @format: format of the string.
+ * @l: length of the string format to be passed.
+ * Return: tokens with formatting in a double pointer.
+ */
+char **handlingFormat(const char *format, int l)
 {
-    int len = l, i, j, s;
-    char **res; // array of strings after finding specifiers
-    char *tmp;
+int len = l, i, j, s;
+char **res;
+char *tmp;
 
-    if (!format || len == 0)
-        return (NULL);
+if (!format || len == 0)
+return (NULL);
 
-    // printf("res len successful = %d\n", len);
+res = (char **) malloc(sizeof(char *) * len);
 
-    res = (char **) malloc(sizeof(char *) * len);
+if (!res)
+return (NULL);
 
-    if (!res)
-        return (NULL);
+for (i = 0, s = 0, j = 0; format[i] != '\0'; i++)
+{
+if (format[i] == '%')
+{
+res[j++] = getSubstring(format, s, i);
 
-    for (i = 0, s = 0, j = 0; format[i] != '\0'; i++)
-    {
-        // find this %
-        if (format[i] == '%')
-        {
-            // adding previous string
-            res[j++] = getSubstring(format, s, i);
+tmp = malloc(2);
+tmp[0] = '%';
+tmp[1] = format[++i];
+res[j++] = tmp;
 
-            // adding specifier
-            tmp = malloc(2);
-            tmp[0] = '%';
-            tmp[1] = format[++i];
-            res[j++] = tmp;
-
-            s = i + 1;
-        }
-        // find last string
-        else if (format[i + 1] == '\0')
-        {
-            res[j++] = getSubstring(format, s, i + 1);
-            // printf("Lol: %s\n", res[j - 1]);
-        }
-        // printf("Lol: %s\n", res[j - 1]);
-    }
-
-    // * testing
-    // printArrStr(res, len);
-
-    return (res);
+s = i + 1;
+}
+else if (format[i + 1] == '\0')
+{
+res[j++] = getSubstring(format, s, i + 1);
+}
 }
 
+return (res);
+}
+
+/**
+ * printStr - Prints a string to stdout.
+ *
+ * @s: A pointer to the string to be printed.
+ *
+ * Return: The number of characters printed.
+ */
 int printStr(char *s)
 {
-    int i = 0;
+int i = 0;
 
-    if (!s)
-        return (i);
+if (!s)
+return (i);
 
-    for (; s[i] != '\0'; i++)
-        _putchar(s[i]);
+for (; s[i] != '\0'; i++)
+_putchar(s[i]);
 
-    return (i);
+return (i);
 }
 
+/**
+ * _printf - a function that produces output according to a format.
+ * @format: A string that contains the text to be written to standard output.
+ * This function parses the format string and prints the appropriate output
+ * based on the format specifier passed in the string.
+ * and -1 on failure.
+ * Return: int
+*/
 int _printf(const char *format, ...)
 {
-    char **res;
-    char *tmp;
-    int len, printed = 0, i = 0;
-    va_list args;
+char **res;
+char *tmp;
+int len, printed = 0, i = 0;
+va_list args;
 
-    if (!format)
-        return (-1);
+if (!format)
+return (-1);
 
-    len = resLength(format);
+len = resLength(format);
 
-    res = handlingFormat(format, len);
+res = handlingFormat(format, len);
 
-    va_start(args, format);
+va_start(args, format);
 
-    for (; i < len; i++)
-    {
-        if (res[i][0] == '%')
-        {
-            if (res[i][1] == 'c')
-            {
-                printed++;
-                _putchar(va_arg(args, int));
-            }
-            else if (res[i][1] == 's')
-            {
-                tmp = va_arg(args, char *);
-                if (!tmp)
-                    tmp = "(null)";
-                printed += printStr(tmp);
-            }
-        }
-        else
-            printed += printStr(res[i]);
-    }
+for (; i < len; i++)
+{
+if (res[i][0] == '%')
+{
+if (res[i][1] == 'c')
+{
+printed++;
+_putchar(va_arg(args, int));
+}
+else if (res[i][1] == 's')
+{
+tmp = va_arg(args, char *);
+if (!tmp)
+tmp = "(null)";
+printed += printStr(tmp);
+}
+}
+else
+printed += printStr(res[i]);
+}
 
-    va_end(args);
+va_end(args);
 
-    return (printed);
+return (printed);
 }
