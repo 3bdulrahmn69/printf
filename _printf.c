@@ -135,7 +135,7 @@ char *tmp;
 int len, printed = 0, i = 0;
 va_list args;
 
-if (!format)
+if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
 
 len = resLength(format);
