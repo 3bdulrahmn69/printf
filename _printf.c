@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+void freeArrStr(char **s, int j)
+{
+    while (j >= 0)
+    free(s[j--]);
+
+    free(s);
+}
+
 /**
  * resLength - Computes the length of the result produced by printf
  * @format: format string to be printed
@@ -85,6 +93,11 @@ if (format[i] == '%')
 res[j++] = getSubstring(format, s, i);
 
 tmp = malloc(2);
+if (!tmp)
+{
+freeArrStr(res, j - 1);
+return (NULL);
+}
 tmp[0] = '%';
 tmp[1] = format[++i];
 res[j++] = tmp;
@@ -141,6 +154,8 @@ return (-1);
 len = resLength(format);
 
 res = handlingFormat(format, len);
+if (!res)
+return (-1);
 
 va_start(args, format);
 
