@@ -72,7 +72,7 @@ int resLength(const char *format)
 char * getSubstring(const char *str, int s, int e)
 {
     int i = s;
-    char *res = malloc(e - s);
+    char *res = malloc(e - s + 1);
 
     if (!res)
         return (NULL);
@@ -81,6 +81,8 @@ char * getSubstring(const char *str, int s, int e)
     {
         res[i - s] = str[i];
     }
+
+    res[i] = '\0';
 
     return (res);
 }
