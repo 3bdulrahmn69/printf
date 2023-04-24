@@ -1,3 +1,5 @@
+.vscode
+.vscode/
 tests
-tests/*
+tests/
 a.out
