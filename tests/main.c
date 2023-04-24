@@ -4,7 +4,7 @@
 int main(void)
 {
     // printf("BEGIN\n");
-    _printf("Hello world%skarem%c\n");
+    _printf("Hello world%skarem%c\n", "\ntest\n", '_');
 
     return (0);
 }

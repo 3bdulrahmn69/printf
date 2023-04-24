@@ -1,7 +1,8 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdarg.h>
 
+/*
 typedef struct specifier
 {
     int c;
@@ -9,6 +10,7 @@ typedef struct specifier
     // int i;
     // double f;
 } Specifier;
+*/
 
 // * for testing
 void printArrStr(char **astr, int len)
@@ -26,6 +28,7 @@ void printArrStr(char **astr, int len)
  * @c: string to print
  * Return: int
 */
+/*
 void * inTarget(char c)
 {
     Specifier *obj = (Specifier *) malloc(sizeof(Specifier));
@@ -39,6 +42,7 @@ void * inTarget(char c)
 
     return (obj);
 }
+*/
 
 int resLength(const char *format)
 {
@@ -129,17 +133,62 @@ char ** handlingFormat(const char *format, int l)
     }
 
     // * testing
-    printArrStr(res, len);
+    // printArrStr(res, len);
 
     return (res);
+}
+
+int printStr(char *s)
+{
+    int i = 0;
+
+    if (!s)
+        return (i);
+
+    for (; s[i] != '\0'; i++)
+        _putchar(s[i]);
+
+    return (i);
 }
 
 int _printf(const char *format, ...)
 {
     char **res;
-    int len = resLength(format);
+    char *tmp;
+    int len, printed = 0, i = 0;
+    va_list args;
+
+    if (!format)
+        return (-1);
+
+    len = resLength(format);
 
     res = handlingFormat(format, len);
 
-    return (0);
+    va_start(args, format);
+
+    for (; i < len; i++)
+    {
+        if (res[i][0] == '%')
+        {
+            if (res[i][1] == 'c')
+            {
+                printed++;
+                _putchar(va_arg(args, int));
+            }
+            else if (res[i][1] == 's')
+            {
+                tmp = va_arg(args, char *);
+                if (!tmp)
+                    tmp = "(null)";
+                printed += printStr(tmp);
+            }
+        }
+        else
+            printed += printStr(res[i]);
+    }
+
+    va_end(args);
+
+    return (printed);
 }
