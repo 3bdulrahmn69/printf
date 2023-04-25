@@ -13,8 +13,8 @@
  */
 typedef struct specifier
 {
-    int c;
-    int (*f)(va_list args);
+int c;
+int (*f)(va_list args);
 } Specifier;
 
 int _putchar(char c);
