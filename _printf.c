@@ -167,7 +167,7 @@ for (; i < len; i++)
 {
 if (res[i][0] == '%')
 {
-/*tmp = inTarget(res[i][1]);*/
+tmp = inTarget(res[i][1]);
 if (tmp)
 printed += spec[tmp - 1].f(args);
 }
