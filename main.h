@@ -23,6 +23,7 @@ int _printf(const char *format, ...);
 void freeArrStr(char **s, int j);
 int _printf_char(va_list args);
 int _printf_string(va_list args);
+int inTarget(char c);
 
 
 #endif /* MAIN_H */
