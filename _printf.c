@@ -144,13 +144,13 @@ break;
 int _printf(const char *format, ...)
 {
 char **res;
-/*char tmp;*/
+char tmp;
 int len, printed = 0, i = 0;
 va_list args;
-/*Specifier spec[] = {*/
-/*{ 'c', _printf_char },*/
-/*{ 's', _printf_string },*/
-/*};*/
+Specifier spec[] = {
+{ 'c', _printf_char },
+{ 's', _printf_string },
+};
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
@@ -168,11 +168,11 @@ for (; i < len; i++)
 if (res[i][0] == '%')
 {
 /*tmp = inTarget(res[i][1]);*/
-/*if (tmp)*/
-/*printed += spec[tmp - 1].f(args);*/
-/*}*/
-/*else*/
-/*printed += printStr(res[i]);*/
+if (tmp)
+printed += spec[tmp - 1].f(args);
+}
+else
+printed += printStr(res[i]);
 }
 
 va_end(args);
