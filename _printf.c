@@ -3,20 +3,6 @@
 #include <stdarg.h>
 
 /**
- * freeArrStr - func
- * @s: char **
- * @j: int
- * Return: void
-*/
-void freeArrStr(char **s, int j)
-{
-    while (j >= 0)
-    free(s[j--]);
-
-    free(s);
-}
-
-/**
  * resLength - Computes the length of the result produced by printf
  * @format: format string to be printed
  * Return: length of the result
