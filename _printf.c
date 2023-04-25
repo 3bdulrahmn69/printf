@@ -129,8 +129,9 @@ return (3);
 break;
 case 'i':
 return (4);
+break;
 default:
-return (5);
+return (0);
 break;
 }
 }
