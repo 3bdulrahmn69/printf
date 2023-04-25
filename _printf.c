@@ -152,8 +152,8 @@ Specifier spec[] = {
 { 's', _printf_string },
 };
 
-/*if (format == NULL || (format[0] == '%' && format[1] == '\0'))*/
-/*return (-1);*/
+if (!format || (format[0] == '%' && format[1] == '\0'))
+return (-1);
 
 len = resLength(format);
 
