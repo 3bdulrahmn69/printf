@@ -130,7 +130,7 @@ break;
 case 'i':
 return (4);
 default:
-return (0);
+return (5);
 break;
 }
 }
