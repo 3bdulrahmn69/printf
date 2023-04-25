@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+/**
+ * freeArrStr - func
+ * @s: char **
+ * @j: int
+ * Return: void
+*/
 void freeArrStr(char **s, int j)
 {
     while (j >= 0)
