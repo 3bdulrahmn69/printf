@@ -1,5 +1,7 @@
 #include "main.h"
+
 #include <stdlib.h>
+
 #include <stdarg.h>
 
 /**
@@ -106,39 +108,49 @@ return (res);
 }
 
 /**
- * printStr - Prints a string to stdout.
- *
- * @s: A pointer to the string to be printed.
- *
- * Return: The number of characters printed.
- */
-int printStr(char *s)
+ * inTarget - string
+ * @c: char
+ * Return: int
+*/
+int inTarget(char c)
 {
-int i = 0;
-
-if (!s)
-return (i);
-
-for (; s[i] != '\0'; i++)
-_putchar(s[i]);
-
-return (i);
+switch (c)
+{
+case 'c':
+return (1);
+break;
+case 's':
+return (2);
+break;
+case 'd':
+return (3);
+break;
+case 'i':
+return (4);
+default:
+return (0);
+break;
+}
 }
 
 /**
- * _printf - a function that produces output according to a format.
- * @format: A string that contains the text to be written to standard output.
- * This function parses the format string and prints the appropriate output
- * based on the format specifier passed in the string.
- * and -1 on failure.
- * Return: int
+* _printf - a function that produces output according to a format.
+* @format: A string that contains the text to be written to standard output.
+* This function parses the format string and prints the appropriate output
+* based on the format specifier passed in the string.
+* and -1 on failure.
+* Return: int
 */
 int _printf(const char *format, ...)
 {
 char **res;
-char *tmp;
+char tmp;
 int len, printed = 0, i = 0;
 va_list args;
+Specifier spec[] = {
+{ .c = 'c', .f = _printf_char },
+{ .c = 's', .f = _printf_string },
+};
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
@@ -155,18 +167,9 @@ for (; i < len; i++)
 {
 if (res[i][0] == '%')
 {
-if (res[i][1] == 'c')
-{
-printed++;
-_putchar(va_arg(args, int));
-}
-else if (res[i][1] == 's')
-{
-tmp = va_arg(args, char *);
-if (!tmp)
-tmp = "(null)";
-printed += printStr(tmp);
-}
+tmp = inTarget(res[i][1]);
+if (tmp)
+printed += spec[tmp - 1].f(args);
 }
 else
 printed += printStr(res[i]);
