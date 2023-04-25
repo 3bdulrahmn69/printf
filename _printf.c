@@ -144,7 +144,7 @@ break;
 int _printf(const char *format, ...)
 {
 char **res;
-char tmp;
+/*char tmp;*/
 int len, printed = 0, i = 0;
 va_list args;
 Specifier spec[] = {
