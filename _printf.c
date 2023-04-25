@@ -147,10 +147,10 @@ char **res;
 /*char tmp;*/
 int len, printed = 0, i = 0;
 va_list args;
-Specifier spec[] = {
-{ 'c', _printf_char },
-{ 's', _printf_string },
-};
+/*Specifier spec[] = {*/
+/*{ 'c', _printf_char },*/
+/*{ 's', _printf_string },*/
+/*};*/
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
