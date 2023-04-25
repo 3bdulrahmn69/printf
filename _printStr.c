@@ -7,14 +7,15 @@
  *
  * Return: The number of characters printed.
  */
-int printStr(char * s) {
-    int i = 0;
+int printStr(char *s)
+{
+int i = 0;
 
-    if (!s)
-        return (i);
+if (!s)
+return (i);
 
-    for (; s[i] != '\0'; i++)
-        _putchar(s[i]);
+for (; s[i] != '\0'; i++)
+_putchar(s[i]);
 
-    return (i);
+return (i);
 }
