@@ -11,171 +11,171 @@
  */
 int resLength(const char *format)
 {
-    int i = 0, len = 1;
+int i = 0, len = 1;
 
-    if (!format)
-        return (0);
+if (!format)
+return (0);
 
-    for (; format[i] != '\0'; i++)
-    {
-        if (format[i] == '%')
-        {
-            if (format[i + 1] == 's' || format[i + 1] == 'c')
-                len++;
-        }
+for (; format[i] != '\0'; i++)
+{
+if (format[i] == '%')
+{
+if (format[i + 1] == 's' || format[i + 1] == 'c')
+len++;
+}
 
-        if (format[i - 2] == '%')
-            len++;
-    }
+if (format[i - 2] == '%')
+len++;
+}
 
-    if (i == 0)
-        return (0);
+if (i == 0)
+return (0);
 
-    return (len);
+return (len);
 }
 
 /**
- * getSubstring - extracts a substring from a given string
- * @str: the original string
- * @s: the start index of the substring
- * @e: the end index of the substring
- * Return: pointer to the extracted substring
- */
+* getSubstring - extracts a substring from a given string
+* @str: the original string
+* @s: the start index of the substring
+* @e: the end index of the substring
+* Return: pointer to the extracted substring
+*/
 char *getSubstring(const char *str, int s, int e)
 {
-    int i = s;
-    char *res = malloc(e - s + 1);
+int i = s;
+char *res = malloc(e - s + 1);
 
-    if (!res)
-        return (NULL);
+if (!res)
+return (NULL);
 
-    for (; i < e; i++)
-    {
-        res[i - s] = str[i];
-    }
+for (; i < e; i++)
+{
+res[i - s] = str[i];
+}
 
-    res[i] = '\0';
+res[i] = '\0';
 
-    return (res);
+return (res);
 }
 
 /**
- * handlingFormat - function that tokenize a string to
- * get the substrings and their format in a % like printf
- * @format: format of the string.
- * @l: length of the string format to be passed.
- * Return: tokens with formatting in a double pointer.
- */
+* handlingFormat - function that tokenize a string to
+* get the substrings and their format in a % like printf
+* @format: format of the string.
+* @l: length of the string format to be passed.
+* Return: tokens with formatting in a double pointer.
+*/
 char **handlingFormat(const char *format, int l)
 {
-    int len = l, i, j, s;
-    char **res;
-    char *tmp;
+int len = l, i, j, s;
+char **res;
+char *tmp;
 
-    if (!format || len == 0)
-        return (NULL);
+if (!format || len == 0)
+return (NULL);
 
-    res = (char **)malloc(sizeof(char *) * len);
+res = (char **)malloc(sizeof(char *) * len);
 
-    if (!res)
-        return (NULL);
+if (!res)
+return (NULL);
 
-    for (i = 0, s = 0, j = 0; format[i] != '\0'; i++)
-    {
-        if (format[i + 1] == '\0')
-        {
-            res[j++] = getSubstring(format, s, i + 1);
-        }
-        else if (format[i] == '%')
-        {
-            res[j++] = getSubstring(format, s, i);
+for (i = 0, s = 0, j = 0; format[i] != '\0'; i++)
+{
+if (format[i + 1] == '\0')
+{
+res[j++] = getSubstring(format, s, i + 1);
+}
+else if (format[i] == '%')
+{
+res[j++] = getSubstring(format, s, i);
 
-            tmp = malloc(2);
-            if (!tmp)
-            {
-                freeArrStr(res, j - 1);
-                return (NULL);
-            }
-            tmp[0] = '%';
-            tmp[1] = inTarget(format[i + 1]);
-            if (tmp)
-                i++;
-            res[j++] = tmp;
+tmp = malloc(2);
+if (!tmp)
+{
+freeArrStr(res, j - 1);
+return (NULL);
+}
+tmp[0] = '%';
+tmp[1] = inTarget(format[i + 1]);
+if (tmp)
+i++;
+res[j++] = tmp;
 
-            s = i + 1;
-        }
-    }
+s = i + 1;
+}
+}
 
-    return (res);
+return (res);
 }
 
 /**
- * inTarget - string
- * @c: char
- * Return: int
- */
+* inTarget - string
+* @c: char
+* Return: int
+*/
 int inTarget(char c)
 {
-    switch (c)
-    {
-    case 'c':
-        return (1);
-        break;
-    case 's':
-        return (2);
-        break;
-    case 'd':
-        return (3);
-        break;
-    case 'i':
-        return (4);
-    default:
-        return (0);
-        break;
-    }
+switch (c)
+{
+case 'c':
+return (1);
+break;
+case 's':
+return (2);
+break;
+case 'd':
+return (3);
+break;
+case 'i':
+return (4);
+default:
+return (0);
+break;
+}
 }
 
 /**
- * _printf - a function that produces output according to a format.
- * @format: A string that contains the text to be written to standard output.
- * This function parses the format string and prints the appropriate output
- * based on the format specifier passed in the string.
- * and -1 on failure.
- * Return: int
- */
+* _printf - a function that produces output according to a format.
+* @format: A string that contains the text to be written to standard output.
+* This function parses the format string and prints the appropriate output
+* based on the format specifier passed in the string.
+* and -1 on failure.
+* Return: int
+*/
 int _printf(const char *format, ...)
 {
-    char **res;
-    int len, printed = 0, i = 0;
-    va_list args;
-    Specifier spec[] = {
-        {'c', _printf_char},
-        {'s', _printf_string},
-    };
+char **res;
+int len, printed = 0, i = 0;
+va_list args;
+Specifier spec[] = {
+{'c', _printf_char},
+{'s', _printf_string},
+};
 
-    if (!format || (format[0] == '%' && format[1] == '\0'))
-        return (-1);
+if (!format || (format[0] == '%' && format[1] == '\0'))
+return (-1);
 
-    len = resLength(format);
+len = resLength(format);
 
-    res = handlingFormat(format, len);
-    if (!res)
-        return (-1);
+res = handlingFormat(format, len);
+if (!res)
+return (-1);
 
-    va_start(args, format);
+va_start(args, format);
 
-    for (; i < len; i++)
-    {
-        if (res[i][0] == '%')
-        {
-            if (res[i][1] != 0)
-                printed += spec[res[i][1] - 1].f(args);
-        }
-        else
-            printed += printStr(res[i]);
-    }
+for (; i < len; i++)
+{
+if (res[i][0] == '%')
+{
+if (res[i][1] != 0)
+printed += spec[res[i][1] - 1].f(args);
+}
+else
+printed += printStr(res[i]);
+}
 
-    va_end(args);
+va_end(args);
 
-    return (printed);
+return (printed);
 }
