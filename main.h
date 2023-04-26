@@ -24,6 +24,6 @@ void freeArrStr(char **s, int j);
 int _printf_char(va_list args);
 int _printf_string(va_list args);
 int inTarget(char c);
-
+void printArrStr(char **astr, int len); /* testing */
 
 #endif /* MAIN_H */

@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 
+#include <stdio.h>
+
 #include <stdarg.h>
 
 /**
@@ -19,10 +21,7 @@ return (0);
 for (; format[i] != '\0'; i++)
 {
 if (format[i] == '%')
-{
-if (format[i + 1] == 's' || format[i + 1] == 'c')
 len++;
-}
 
 if (format[i - 2] == '%')
 len++;
@@ -35,12 +34,12 @@ return (len);
 }
 
 /**
-* getSubstring - extracts a substring from a given string
-* @str: the original string
-* @s: the start index of the substring
-* @e: the end index of the substring
-* Return: pointer to the extracted substring
-*/
+ * getSubstring - extracts a substring from a given string
+ * @str: the original string
+ * @s: the start index of the substring
+ * @e: the end index of the substring
+ * Return: pointer to the extracted substring
+ */
 char *getSubstring(const char *str, int s, int e)
 {
 int i = s;
@@ -60,12 +59,12 @@ return (res);
 }
 
 /**
-* handlingFormat - function that tokenize a string to
-* get the substrings and their format in a % like printf
-* @format: format of the string.
-* @l: length of the string format to be passed.
-* Return: tokens with formatting in a double pointer.
-*/
+ * handlingFormat - function that tokenize a string to
+ * get the substrings and their format in a % like printf
+ * @format: format of the string.
+ * @l: length of the string format to be passed.
+ * Return: tokens with formatting in a double pointer.
+ */
 char **handlingFormat(const char *format, int l)
 {
 int len = l, i, j, s;
@@ -97,9 +96,7 @@ freeArrStr(res, j - 1);
 return (NULL);
 }
 tmp[0] = '%';
-tmp[1] = inTarget(format[i + 1]);
-if (tmp)
-i++;
+tmp[1] = '0' + inTarget(format[++i]);
 res[j++] = tmp;
 
 s = i + 1;
@@ -169,8 +166,14 @@ for (; i < len; i++)
 {
 if (res[i][0] == '%')
 {
-if (res[i][1] != 0)
+if (res[i][1] != '0')
 printed += spec[res[i][1] - 1].f(args);
+
+if (res[i][1] == '0')
+{
+_putchar('0');
+printed++;
+}
 }
 else
 printed += printStr(res[i]);
