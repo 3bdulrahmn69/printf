@@ -167,7 +167,7 @@ for (; i < len; i++)
 if (res[i][0] == '%')
 {
 if (res[i][1] != '0')
-printed += spec[res[i][1] - 1].f(args);
+printed += spec[res[i][1] - '0' - 1].f(args);
 
 if (res[i][1] == '0')
 {
