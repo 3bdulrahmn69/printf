@@ -129,6 +129,8 @@ return (4);
 break;
 case 'b':
 return (5);
+case 'u':
+return (6);
 default:
 return (0);
 break;
@@ -151,7 +153,7 @@ va_list args;
 Specifier spec[] = {
 {'c', _printf_char}, {'s', _printf_string},
 {'d', _printf_int}, {'i', _printf_int},
-{'b', _printf_binary}
+{'b', _printf_binary}, {'u', _printf_uint},
 };
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
