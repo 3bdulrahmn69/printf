@@ -34,12 +34,12 @@ return (len);
 }
 
 /**
- * getSubstring - extracts a substring from a given string
- * @str: the original string
- * @s: the start index of the substring
- * @e: the end index of the substring
- * Return: pointer to the extracted substring
- */
+* getSubstring - extracts a substring from a given string
+* @str: the original string
+* @s: the start index of the substring
+* @e: the end index of the substring
+* Return: pointer to the extracted substring
+*/
 char *getSubstring(const char *str, int s, int e)
 {
 int i = s;
@@ -59,12 +59,12 @@ return (res);
 }
 
 /**
- * handlingFormat - function that tokenize a string to
- * get the substrings and their format in a % like printf
- * @format: format of the string.
- * @l: length of the string format to be passed.
- * Return: tokens with formatting in a double pointer.
- */
+* handlingFormat - function that tokenize a string to
+* get the substrings and their format in a % like printf
+* @format: format of the string.
+* @l: length of the string format to be passed.
+* Return: tokens with formatting in a double pointer.
+*/
 char **handlingFormat(const char *format, int l)
 {
 int len = l, i, j, s;
@@ -149,6 +149,8 @@ va_list args;
 Specifier spec[] = {
 {'c', _printf_char},
 {'s', _printf_string},
+{'d', _printf_int},
+{'i', _printf_int},
 };
 
 if (!format || (format[0] == '%' && format[1] == '\0'))

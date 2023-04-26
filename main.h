@@ -25,5 +25,7 @@ int _printf_char(va_list args);
 int _printf_string(va_list args);
 int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
+char *intToString(int num);
+int _printf_int(va_list args);
 
 #endif /* MAIN_H */
