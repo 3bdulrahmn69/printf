@@ -38,6 +38,11 @@ if (num == UINT_MAX)
 res = "11111111111111111111111111111111";
 return (res);
 }
+if (num == INT_MAX * 2u)
+{
+res = "11111111111111111111111111111110";
+return (res);
+}
 while (i * 2 <= num)
 {
 i *= 2;
