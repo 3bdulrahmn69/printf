@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
 #include <limits.h>
+#include <stdio.h>
 
 /**
  * zero - fjsd
@@ -33,17 +34,7 @@ if (num == 0)
 res = zero();
 return (res);
 }
-if (num == UINT_MAX)
-{
-res = "11111111111111111111111111111111";
-return (res);
-}
-if (num == INT_MAX * 2u)
-{
-res = "11111111111111111111111111111110";
-return (res);
-}
-while (i * 2 <= num)
+while (i < UINT_MAX / 2 && i * 2 <= num)
 {
 i *= 2;
 digits++;
