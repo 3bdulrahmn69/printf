@@ -33,6 +33,11 @@ if (num == 0)
 res = zero();
 return (res);
 }
+if (num == UINT_MAX)
+{
+res = "1111111111111111111111111111111111111111111111111111111111111111";
+return (res);
+}
 while (i * 2 <= num)
 {
 i *= 2;
