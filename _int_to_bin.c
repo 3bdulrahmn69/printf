@@ -19,13 +19,13 @@ return (res);
 }
 
 /**
- * intToBinary - fjsd
- * @num: sodpjga
- * Return: char *
- */
+* intToBinary - fjsd
+* @num: sodpjga
+* Return: char *
+*/
 char *intToBinary(unsigned int num)
 {
-unsigned int i = 1, digits = 1, rem, j = 0;
+unsigned int i = 1, digits = 1, j;
 char *res;
 
 if (num == 0)
@@ -41,26 +41,12 @@ digits++;
 res = malloc(digits + 1);
 if (!res)
 return (NULL);
-res[j++] = '1';
-rem = num - i;
-i /= 2;
-while (i > 1)
+
+i = num;
+j = digits - 1;
+while (i > 0)
 {
-while (rem < i)
-{
-i /= 2;
-res[j++] = '0';
-}
-if (rem == i)
-{
-res[j++] = '1';
-rem -= i;
-}
-while (rem > i)
-{
-res[j++] = '1';
-rem -= i;
-}
+res[j--] = (i % 2) + '0';
 i /= 2;
 }
 res[digits] = '\0';
