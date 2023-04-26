@@ -27,5 +27,6 @@ int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
 char *intToString(int num);
 int _printf_int(va_list args);
+char *revString(char *s, int len, int negFlag);
 
 #endif /* MAIN_H */

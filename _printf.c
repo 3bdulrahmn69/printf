@@ -147,10 +147,8 @@ char **res;
 int len, printed = 0, i = 0;
 va_list args;
 Specifier spec[] = {
-{'c', _printf_char},
-{'s', _printf_string},
-{'d', _printf_int},
-{'i', _printf_int},
+{'c', _printf_char}, {'s', _printf_string},
+{'d', _printf_int}, {'i', _printf_int},
 };
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
