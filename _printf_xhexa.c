@@ -1,24 +1,31 @@
 #include "main.h"
 
 /**
- * printf_xhexa - function to print hexadecimal numbers
- * 
+ * _printf_xhexa - function to print hexadecimal numbers
  * @args: list
- *
- * @Return: int
+ * Return: int
  */
-
 int _printf_xhexa(va_list args)
 {
-    unsigned int num = va_arg(args, unsigned int);
-    int count = 0;
+	unsigned int num = va_arg(args, unsigned int);
+	int count = 0;
+	int digits[32];
 
-    /* Print the hexadecimal digits in reverse order */
-    do {
-        int digit = num % 16;
-        count += _putchar(digit < 10 ? digit + '0' : digit - 10 + 'a');
-        num /= 16;
-    } while (num > 0);
+	/* Compute the hexadecimal digits in the correct order */
+	int num_digits = 0;
 
-    return count;
+	do {
+		int digit = num % 16;
+
+		digits[num_digits++] = digit < 10 ? digit + '0' : digit - 10 + 'a';
+		num /= 16;
+	} while (num > 0);
+
+	/* Print the hexadecimal digits in the correct order */
+	for (int i = num_digits - 1; i >= 0; i--)
+	{
+		count += _putchar(digits[i]);
+	}
+
+	return (count);
 }
