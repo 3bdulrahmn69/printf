@@ -23,10 +23,12 @@ int _printf(const char *format, ...);
 void freeArrStr(char **s, int j);
 int _printf_char(va_list args);
 int _printf_string(va_list args);
+int _printf_binary(va_list args);
+int _printf_int(va_list args);
 int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
 char *intToString(int num);
-int _printf_int(va_list args);
 char *revString(char *s, int len, int negFlag);
+char *intToBinary(unsigned int num);
 
 #endif /* MAIN_H */
