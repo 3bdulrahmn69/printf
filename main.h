@@ -26,6 +26,8 @@ int _printf_string(va_list args);
 int _printf_binary(va_list args);
 int _printf_int(va_list args);
 int _printf_uint(va_list args);
+int _printf_xhexa(va_list args);
+int _printf_Xhexa(va_list args);
 int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
 char *intToString(int num);

@@ -8,15 +8,10 @@
  * @Return: int
  */
 
-int printf_Xhexa(va_list args)
+int _printf_Xhexa(va_list args)
 {
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
-
-    /* Print the "0X" prefix if the number is nonzero */
-    if (num != 0) {
-        count += _puts("0X");
-    }
 
     /* Print the hexadecimal digits in reverse order */
     do {

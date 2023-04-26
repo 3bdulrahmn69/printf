@@ -131,6 +131,13 @@ case 'b':
 return (5);
 case 'u':
 return (6);
+break;
+case 'x':
+return (7);
+break;
+case 'X':
+return (8);
+break;
 default:
 return (0);
 break;
@@ -154,6 +161,7 @@ Specifier spec[] = {
 {'c', _printf_char}, {'s', _printf_string},
 {'d', _printf_int}, {'i', _printf_int},
 {'b', _printf_binary}, {'u', _printf_uint},
+{'x', _printf_xhexa}, {'X', _printf_Xhexa},
 };
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
