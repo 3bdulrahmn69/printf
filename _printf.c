@@ -138,6 +138,9 @@ break;
 case 'X':
 return (8);
 break;
+case 'o':
+return (9);
+break;
 default:
 return (0);
 break;
@@ -162,6 +165,7 @@ Specifier spec[] = {
 {'d', _printf_int}, {'i', _printf_int},
 {'b', _printf_binary}, {'u', _printf_uint},
 {'x', _printf_xhexa}, {'X', _printf_Xhexa},
+{'o', _printf_oct},
 };
 
 if (!format || (format[0] == '%' && format[1] == '\0'))
