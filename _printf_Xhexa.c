@@ -8,7 +8,7 @@
 int _printf_Xhexa(va_list args)
 {
 unsigned int num = va_arg(args, unsigned int);
-int count = 0;
+int count = 0, i;
 int digits[32];
 
 /* Compute the hexadecimal digits in the correct order */
@@ -23,7 +23,7 @@ num /= 16;
 
 /* Print the hexadecimal digits in the correct order */
 
-for (int i = num_digits - 1; i >= 0; i--)
+for (i = num_digits - 1; i >= 0; i--)
 {
 count += _putchar(digits[i]);
 }
