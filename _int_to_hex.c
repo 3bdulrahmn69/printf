@@ -8,7 +8,6 @@
  */
 char *_int_to_hex_2digits(int num)
 {
-int count = 0, i;
 char *digits = malloc(2);
 
 digits[1] = num % 16 < 10 ? num % 16 + '0' : num % 16 - 10 + 'A';
