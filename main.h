@@ -19,6 +19,7 @@ int (*f)(va_list args);
 
 int _putchar(char c);
 int printStr(char *s);
+int printSpecStr(char *s);
 int _printf(const char *format, ...);
 void freeArrStr(char **s, int j);
 int _printf_char(va_list args);
@@ -29,11 +30,13 @@ int _printf_uint(va_list args);
 int _printf_xhexa(va_list args);
 int _printf_Xhexa(va_list args);
 int _printf_oct(va_list args);
+int _printf_spec_string(va_list args);
 int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
 char *intToString(int num);
 char *uintToString(unsigned int num);
 char *revString(char *s, int len, int negFlag);
 char *intToBinary(unsigned int num);
+char *_int_to_hex_2digits(int num);
 
 #endif /* MAIN_H */
