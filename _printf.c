@@ -175,6 +175,8 @@ if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
 
 len = resLength(format);
+if (len == 0)
+return (0);
 
 res = handlingFormat(format, len);
 if (!res)
