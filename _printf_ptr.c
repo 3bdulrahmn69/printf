@@ -17,6 +17,9 @@ int num_digits = 0;
 if (!num)
 return (printStr("(nil)"));
 
+if (num == -1)
+return (printStr("0xffffffffffffffff"));
+
 do {
 int digit = num % 16;
 
