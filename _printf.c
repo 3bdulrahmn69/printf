@@ -170,20 +170,15 @@ Specifier spec[] = {
 {'x', _printf_xhexa}, {'X', _printf_Xhexa},
 {'o', _printf_oct}, {'S', _printf_spec_string},
 };
-
 if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);
-
 len = resLength(format);
 if (len == 0)
 return (0);
-
 res = handlingFormat(format, len);
 if (!res)
 return (-1);
-
 va_start(args, format);
-
 for (; i < len; i++)
 {
 if (res[i][0] == '%')
@@ -200,8 +195,6 @@ printed++;
 else
 printed += printStr(res[i]);
 }
-
 va_end(args);
-
 return (printed);
 }
