@@ -9,7 +9,7 @@
  */
 int printSpecStr(char *s)
 {
-int i = 0;
+int i = 0, cnt = 0;
 
 if (!s)
 return (i);
@@ -18,8 +18,8 @@ for (; s[i] != '\0'; i++)
 {
 if ((s[i] > 0 && s[i] < 32) || (s[i] >= 127))
 {
-printStr("\\x");
-printStr(_int_to_hex_2digits(s[i]));
+cnt += printStr("\\x");
+cnt += printStr(_int_to_hex_2digits(s[i])) - 1;
 }
 else
 {
@@ -27,5 +27,5 @@ _putchar(s[i]);
 }
 }
 
-return (i);
+return (i + cnt);
 }
