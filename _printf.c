@@ -144,6 +144,9 @@ break;
 case 'S':
 return (10);
 break;
+case 'p':
+return (11);
+break;
 default:
 return (0);
 break;
@@ -169,6 +172,7 @@ Specifier spec[] = {
 {'b', _printf_binary}, {'u', _printf_uint},
 {'x', _printf_xhexa}, {'X', _printf_Xhexa},
 {'o', _printf_oct}, {'S', _printf_spec_string},
+{'p', _printf_ptr},
 };
 if (!format || (format[0] == '%' && format[1] == '\0'))
 return (-1);

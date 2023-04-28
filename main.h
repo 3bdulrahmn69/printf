@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <stdarg.h>
+#include <stdint.h>
 
 /**
  * struct specifier - A structure defining a
@@ -31,6 +32,7 @@ int _printf_xhexa(va_list args);
 int _printf_Xhexa(va_list args);
 int _printf_oct(va_list args);
 int _printf_spec_string(va_list args);
+int _printf_ptr(va_list args);
 int inTarget(char c);
 void printArrStr(char **astr, int len); /* testing */
 char *intToString(int num);
